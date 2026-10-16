@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="id"> 
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Marketplace Produk Digital</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+<body class="antialiased selection:bg-brand-500 selection:text-white" x-data="{ activeTab: 'catalog', mobileMenu: false, cartOpen: false }">
+  <div class="bg-slate-900 text-slate-300 text-xs py-2 px-4 text-center font-medium">
+     Diskon 15% bagi pembeli pembeli pertama<a href="#catalog" class="underline text-white font-semibold ml-1">Klik untuk selengkapnya &rarr;</a>
+  </div>
+  <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-between gap-3">
+      </div>
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
+        <button @click="activeTab = 'catalog'" :class="activeTab === 'catalog' ? 'text-slate-900 font-semibold' : 'hover:text-slate-900'">Katalog Produk</button>
+        <button @click="activeTab = 'dashboard'" :class="activeTab === 'dashboard' ? 'text-slate-900 font-semibold' : 'hover:text-slate-900'">Data Buyer</button>
+      </nav>
+      <div class="flex items-center gap-3">
+        <button @click="cartOpen = !cartOpen" class="relative p-2 text-slate-600 hover:text-slate-900 rounded-lg hover:bg-slate-100 transition">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+          <span class="absolute top-1 right-1 w-2 h-2 bg-brand-600 rounded-full"></span>
+        </button>
+        <div class="hidden sm:flex items-center gap-2 pl-2 border-l border-slate-200">
+          <img src="assets/logo.png" alt="Avatar" class="w-8 h-8 rounded-full object-cover">
+          <span class="text-sm font-medium text-slate-800">Produk Digital</span>
+        </div>
+        <button @click="mobileMenu = !mobileMenu" class="md:hidden p-2 text-slate-600 hover:text-slate-900">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
+        </button>
+      </div>
+    </div>
+    <div x-show="mobileMenu" class="md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-4 space-y-2">
+      <button @click="activeTab = 'catalog'; mobileMenu = false" class="block w-full text-left py-2 text-sm font-medium text-slate-700">Katalog Produk</button>
+      <button @click="activeTab = 'dashboard'; mobileMenu = false" class="block w-full text-left py-2 text-sm font-medium text-slate-700">Dashboard Buyer</button>
+    </div>
+  </header>
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <div x-show="activeTab === 'catalog'" class="space-y-8">
+      <div class="bg-white border border-slate-200 rounded-2xl p-8 sm:p-12 shadow-sm flex flex-col md:flex-row items-center justify-between gap-8">
+        <div class="max-w-xl space-y-4">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">
+            <span class="w-1.5 h-1.5 rounded-full bg-brand-600"></span> Bangga Produk Lokal
+          </span>
+          <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
+            Aset Digital Premium untuk Tingkatkan Produktivitas Anda.
+          </h1>
+          <p class="text-slate-600 text-sm sm:text-base leading-relaxed">
+            Temukan template dan aset desain siap pakai buatan kreator profesional Indonesia. Akses instan setelah pembayaran.
+          </p>
+          <div class="pt-2 flex flex-wrap gap-3">
+            <a href="#product-grid" class="px-5 py-2.5 rounded-xl bg-slate-900 text-white text-sm font-medium hover:bg-slate-800 transition">Lihat Katalog</a>
+            <button @click="activeTab = 'dashboard'" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 text-sm font-medium hover:bg-slate-50 transition"> Library Saya</button>
+          </div>
+        </div>
+        <div class="w-full md:w-auto bg-slate-100 p-6 rounded-xl border border-slate-200/60 text-center">
+          <div class="text-2xl font-bold text-slate-900">100+</div>
+          <div class="text-xs text-slate-500 mb-4">Produk Berkualitas</div>
+          <div class="text-2xl font-bold text-slate-900">4.9 / 5.0</div>
+          <div class="text-xs text-slate-500">Rating Kepuasan Pembeli</div>
+        </div>
+      </div>
+      <div id="product-grid" class="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-2 overflow-x-auto w-full sm:w-auto pb-2 sm:pb-0 text-sm">
+          <button class="px-4 py-2 rounded-lg bg-slate-900 text-white font-medium shrink-0">Semua</button>
+          <button class="px-4 py-2 rounded-lg bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 font-medium shrink-0">UI Kit</button>
+          <button class="px-4 py-2 rounded-lg bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 font-medium shrink-0">Template Code</button>
+          <button class="px-4 py-2 rounded-lg bg-white border border-slate-200 text-slate-600 hover:bg-slate-50 font-medium shrink-0">E-Book & Guide</button>
+        </div>
+        <div class="w-full sm:w-72">
+          <input type="text" placeholder="Cari aset, template..." class="w-full px-4 py-2 rounded-lg border border-slate-200 text-sm focus:outline-none focus:ring-2 focus:ring-slate-900/20 focus:border-slate-900">
+        </div>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="product-card hover:shadow-md transition group">
+          <div class="aspect-video bg-slate-100 relative overflow-hidden">
+            <img src="assets/notion planner.jpeg" alt="Dashboard plannner" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md text-xs font-semibold bg-white/90 backdrop-blur-sm text-slate-800">Template</span>
+          </div>
+          <div class="p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-slate-500 font-medium">By Studio Notion</span>
+              <div class="flex items-center gap-1 text-xs text-amber-500 font-semibold">★ 4.9 (42)</div>
+            </div>
+            <h3 class="font-semibold text-slate-900 text-base">Notion Planner Dashboard</h3>
+            <p class="text-xs text-slate-600 line-clamp-2">Kelola aktifitas harian dengan template dari Notion yang estetik dan mudah digunakan</p>
+            <div class="pt-2 flex items-center justify-between border-t border-slate-100">
+              <div>
+                <span class="text-xs text-slate-400 line-through">Rp 50.000</span>
+                <div class="font-bold text-slate-900 text-sm">25.000</div>
+              </div>
+              <button @click="cartOpen = true" class="px-4 py-2 rounded-lg bg-slate-900 text-white text-xs font-medium hover:bg-slate-800 transition">Order Sekarang</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card hover:shadow-sm hover:shadow-md transition group">
+          <div class="aspect-video bg-slate-100 relative overflow-hidden">
+            <img src="assets/Ig bundle.jpeg" alt="Ig bundle kit" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md text-xs font-semibold bg-white/90 backdrop-blur-sm text-slate-800">Template</span>
+          </div>
+          <div class="p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-slate-500 font-medium">By Bohoho</span>
+              <div class="flex items-center gap-1 text-xs text-amber-500 font-semibold">★ 5.0 (18)</div>
+            </div>
+            <h3 class="font-semibold text-slate-900 text-base">Bohoho Instagram Bundle</h3>
+            <p class="text-xs text-slate-600 line-clamp-2">Tingkatkan feed instagram anda dengan koleksi template instagram yang kami buat</p>
+            <div class="pt-2 flex items-center justify-between border-t border-slate-100">
+              <div>
+                <span class="text-xs text-slate-400 line-through">Rp 150.000</span>
+                <div class="font-bold text-slate-900 text-sm">Rp 110.000</div>
+              </div>
+              <button @click="cartOpen = true" class="px-4 py-2 rounded-lg bg-slate-900 text-white text-xs font-medium hover:bg-slate-800 transition">Order Sekarang</button>
+            </div>
+          </div>
+        </div>
+        <div class="product-card hover:shadow-md transition group">
+          <div class="aspect-video bg-slate-100 relative overflow-hidden">
+            <img src="assets/AI engineering.jpeg" alt="Template AI" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-md text-xs font-semibold bg-white/90 backdrop-blur-sm text-slate-800">AI Engineering</span>
+          </div>
+          <div class="p-5 space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-slate-500 font-medium">By Afrizon Hasan</span>
+              <div class="flex items-center gap-1 text-xs text-amber-500 font-semibold">★ 4.8 (15)</div>
+            </div>
+            <h3 class="font-semibold text-slate-900 text-base">Ultimate Prompt Collection</h3>
+            <p class="text-xs text-slate-600 line-clamp-2">Maksimalkan potensi AI melalui prompt siap pakai untuk kebutuhanmu</p>
+            <div class="pt-2 flex items-center justify-between border-t border-slate-100">
+              <div>
+                <span class="text-xs text-slate-400 line-through">Rp 150.000</span>
+                <div class="font-bold text-slate-900 text-sm">Rp 75.000</div>
+              </div>
+              <button @click="cartOpen = true" class="px-4 py-2 rounded-lg bg-slate-900 text-white text-xs font-medium hover:bg-slate-800 transition">Order Sekarang</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div x-show="activeTab === 'dashboard'" class="space-y-6" style="display: none;">
+      <div class="bg-white border border-slate-200 rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-900">Dashboard Pembelian Saya</h2>
+          <p class="text-slate-500 text-sm">Akses semua file aset digital yang sudah Anda beli di sini.</p>
+        </div>
+        <div class="flex items-center gap-3 bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-xs text-slate-700">
+          <span class="font-semibold text-slate-900">Total Pembelian:</span> 3 Produk Aktif
+        </div>
+      </div>
+      </div>
+  <footer class="border-t border-slate-200 bg-white mt-16 py-8">
+    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500">
+      &copy; 2026 Produk Digital.
+    </div>
+  </footer>
+
+</body>
+</html>
